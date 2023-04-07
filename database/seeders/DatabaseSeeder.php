@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Courier;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,5 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call(CitySeeder::class);
+        $this->call(CourierSeeder::class);
+        $this->call(ProvinceSeeder::class);
     }
 }
