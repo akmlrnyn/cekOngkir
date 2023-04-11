@@ -1,3 +1,5 @@
+const { post } = require("jquery");
+
 $(document).ready(function () {
     $('select[name="province_origin"]').on('change', function () {
         let provinceId = $(this).val();
@@ -18,3 +20,24 @@ $(document).ready(function () {
         }
     });
 });
+
+$('#destination').select2({
+    ajax: {
+        url: '/api/cities',
+        type: "post",
+        dataType: "json",
+        delay: 150,
+        data: function (params) {
+            return {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                search: $.trim(params.term)
+            }
+        },
+        processResults: function (response) {
+            return{
+                results: response
+            }
+        },
+        cache: true
+    }
+})
